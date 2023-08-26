@@ -1,23 +1,21 @@
-import { useState, useEffect } from 'react';
-import { StarIcon } from '@heroicons/react/20/solid';
-import { RadioGroup } from '@headlessui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { RadioGroup } from "@headlessui/react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductByIdAsync,
   selectProductById,
   selectProductListStatus,
-} from '../../product/productSlice';
-import { useParams } from 'react-router-dom';
-import { addToCartAsync, selectItems } from '../../cart/cartSlice';
-import { selectLoggedInUser } from '../../auth/authSlice';
-import { useAlert } from 'react-alert';
-import { Grid } from 'react-loader-spinner';
-
+} from "../../product/productSlice";
+import { useParams } from "react-router-dom";
+import { addToCartAsync, selectItems } from "../../cart/cartSlice";
+import { selectLoggedInUser } from "../../auth/authSlice";
+import { useAlert } from "react-alert";
+import { Grid } from "react-loader-spinner";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
-
 
 export default function AdminProductDetail() {
   const [selectedColor, setSelectedColor] = useState();
@@ -44,9 +42,9 @@ export default function AdminProductDetail() {
         newItem.size = selectedSize;
       }
       dispatch(addToCartAsync(newItem));
-      alert.success('Item added to Cart');
+      alert.success("Item added to Cart");
     } else {
-      alert.error('Item Already added');
+      alert.error("Item Already added");
     }
   };
 
