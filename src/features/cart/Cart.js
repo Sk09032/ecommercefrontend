@@ -21,9 +21,15 @@ export default function Cart() {
   const [openModal, setOpenModal] = useState(null);
 
   const totalAmount = items.reduce(
-    (amount, item) => item.product.discountPrice * item.quantity + amount,
+    (amount, item) =>
+      (
+        (item.product.price -
+          (item.product.price * item.product.discountPercentage) / 100) *
+        item.quantity
+      ).toFixed(2) + amount,
     0
   );
+  console.log(items);
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (e, item) => {
@@ -76,7 +82,17 @@ export default function Cart() {
                           <h3>
                             <a href={item.product.id}>{item.product.title}</a>
                           </h3>
-                          <p className="ml-4">${item.product.discountPrice}</p>
+                          <p className="ml-4">
+                            $
+                            {item.product.discountPrice
+                              ? item.product.discountPrice
+                              : (
+                                  item.product.price -
+                                  (item.product.price *
+                                    item.product.discountPercentage) /
+                                    100
+                                ).toFixed(3)}
+                          </p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.product.brand}
